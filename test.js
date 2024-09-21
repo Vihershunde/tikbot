@@ -59,19 +59,27 @@ async function runTest() {
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the Next button')); // log FIRST NEXT
-    await driver.$('#com.zhiliaoapp.musically:id/jfq').click();
+    await driver
+      .$(
+        '//android.widget.Button[@resource-id="com.zhiliaoapp.musically:id/jfq"]'
+      )
+      .click();
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the second Next')); // log SECOND NEXT
-    await driver.$('#com.zhiliaoapp.musically:id/jfz').click();
-    countFrom(6);
-
-    console.log(chalk.bold.blue('Clicking the second Next')); // log SECOND NEXT
-    await driver.$('#com.zhiliaoapp.musically:id/jfz').click();
+    await driver
+      .$(
+        '//android.widget.TextView[@resource-id="com.zhiliaoapp.musically:id/jfz"]'
+      )
+      .click();
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the Post')); // log POST
-    await driver.$('#com.zhiliaoapp.musically:id/ldf').click();
+    await driver
+      .$(
+        '//android.widget.TextView[@resource-id="com.zhiliaoapp.musically:id/ldf"]'
+      )
+      .click();
     countFrom(6);
   } finally {
     await driver.pause(1000);
