@@ -1,5 +1,22 @@
 import { runTest, moveLatestVideo } from './funcs.js';
 import chalk from 'chalk';
+import figlet from 'figlet';
+import lolcatjs from 'lolcatjs';
+
+figlet.text(
+  'TikBot',
+  {
+    font: 'Roman',
+  },
+  function (err, data) {
+    if (err) {
+      console.log('Something went wrong with figlet...');
+      console.dir(err);
+      return;
+    }
+    lolcatjs.fromString(data);
+  }
+);
 
 const executionsPerDay = 12;
 const delayMinutes = 35;
