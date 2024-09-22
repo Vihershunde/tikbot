@@ -46,56 +46,45 @@ export async function runTest() {
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the Album Button')); // log
-    await driver.executeScript('mobile: clickGesture', [{ x: 1165, y: 2137 }]);
+    await driver.executeScript('mobile: clickGesture', [
+      {
+        x: 1165 + Math.floor(Math.random() * 11) - 5,
+        y: 2137 + Math.floor(Math.random() * 11) - 5,
+      },
+    ]);
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the All⮟ Button')); // log
-    await driver
-      .$(
-        '//android.widget.LinearLayout[@resource-id="com.zhiliaoapp.musically:id/bvz"]'
-      )
-      .click();
+    await driver.$('//android.widget.TextView[@text="All"]').click();
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the PendingUploads Folder')); // log
-    await driver
-      .$(
-        '//android.widget.TextView[@resource-id="com.zhiliaoapp.musically:id/gaj" and @text="PendingUploads"]'
-      )
-      .click();
+    await driver.$('//android.widget.TextView[@text="PendingUploads"]').click();
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the first video in grid')); // log
-    await driver
-      .$(
-        '(//android.widget.ImageView[@resource-id="com.zhiliaoapp.musically:id/irb"])[1]'
-      )
-      .click();
+    await driver.executeScript('mobile: clickGesture', [
+      {
+        x: 245 + Math.floor(Math.random() * 11) - 5,
+        y: 669 + Math.floor(Math.random() * 11) - 5,
+      },
+    ]);
+
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the Next button')); // log FIRST NEXT
-    await driver
-      .$(
-        '//android.widget.Button[@resource-id="com.zhiliaoapp.musically:id/jfq"]'
-      )
-      .click();
+    await driver.$('//android.widget.Button[@text="Next"]').click();
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the second Next')); // log SECOND NEXT
-    await driver
-      .$(
-        '//android.widget.TextView[@resource-id="com.zhiliaoapp.musically:id/jfz"]'
-      )
-      .click();
+    await driver.$('//android.widget.TextView[@text="Next"]').click();
     countFrom(6);
 
     console.log(chalk.bold.blue('Clicking the Post')); // log POST
-    await driver
-      .$(
-        '//android.widget.TextView[@resource-id="com.zhiliaoapp.musically:id/ldf"]'
-      )
-      .click();
-    countFrom(6);
+    await driver.$('//android.widget.TextView[@text="Post"]').click();
+    await new Promise((resolve) => setTimeout(resolve, 20_000));
+    await driver.pressKeyCode(3);
+    countFrom(11);
   } finally {
     await driver.pause(1000);
     await driver.deleteSession();
@@ -112,7 +101,7 @@ export async function moveLatestVideo() {
     await execPromise('adb devices');
 
     // Find the latest video
-    const findCommand = `find ${PENDING_UPLOADS} -type f \\( -name "*.mp4" -o -name "*.avi" -o -name "*.mov" \\) -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d" "`;
+    const findCommand = `ls -t ${PENDING_UPLOADS}/*.mp4 | head -1`;
     const { stdout: latestVideo } = await execPromise(
       `adb shell "${findCommand}"`
     );
@@ -123,7 +112,8 @@ export async function moveLatestVideo() {
     }
 
     // Move the file
-    const moveCommand = `mv "${latestVideo.trim()}" ${COMPLETED_UPLOADS}/`;
+    const moveCommand = `mv '${latestVideo.trim()}' '${COMPLETED_UPLOADS}/'`;
+
     await execPromise(`adb shell "${moveCommand}"`);
 
     console.log(
