@@ -20,7 +20,6 @@ This script is written in JS and is appium-based.
 
 ## Requirements
 
-- ADB
 - Android Platform Tools
 - CMDline Android Studio tools
 - NodeJS
@@ -28,7 +27,7 @@ This script is written in JS and is appium-based.
 
 ## Installation
 
-- Add ADB, Platform tools and cmdline tools to PATH variable or .bashrc
+- Add Platform tools and cmdline tools to PATH variable or .bashrc
 - Enable USB debugging on Android phone
 - Add 2 folders, `PendingUploads` and `CompletedUploads` to the `/storage/emulated/0/`
 - Edit `driver.executeScript()` in `funcs.js/runTest()` if you need to tap correct x and y values
@@ -72,6 +71,18 @@ node test.js
 
 **Enjoy!**
 
-## Questions:
+## Q&A:
+
+Q: Will this shadowban/terminate my account?
+
+A: It works fine for me, try out and let me know if it works for you!
+
+---
+
+Q: My computer keeps going to sleep and disconnecting ADB, how to prevent it?
+
+A: Use https://github.com/CHerSun/NoSleep if you don't want to dig in settings every time you want to change sleep behaviour. You can also set up OpenSSH Server on your box and monitor it remotely.
+
+### More? 👇
 
 https://t.me/Viherrr
