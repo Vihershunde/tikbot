@@ -35,7 +35,7 @@ export async function runTest() {
   try {
     console.log(chalk.bold.blue('Pressing Home Button')); // log
     await driver.pressKeyCode(3);
-    await driver.$('~TikTok').click();
+    await driver.$('//android.widget.TextView[@text="TikTok"]').click();
     countFrom(6);
     const createButton = await driver.$(
       '//android.widget.Button[@content-desc="Create"]'
@@ -121,7 +121,7 @@ export async function moveLatestVideo() {
     );
 
     // Verify the move
-    const listCommand = `ls -l ${COMPLETED_UPLOADS}/`;
+    const listCommand = `ls -trh ${COMPLETED_UPLOADS}/`;
     const { stdout: completedList } = await execPromise(
       `adb shell "${listCommand}"`
     );
