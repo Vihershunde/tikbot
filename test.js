@@ -18,8 +18,8 @@ figlet.text(
   }
 );
 
-const executionsPerDay = 12;
-const delayMinutes = 35;
+const executionsPerDay = 3;
+let delayMinutes = 120;
 
 let executionCount = 0;
 
@@ -29,6 +29,7 @@ async function dailyExecution() {
     await moveLatestVideo();
 
     executionCount++;
+    delayMinutes += Math.round(Math.random() * 60);
     console.log(chalk.bold.greenBright('executionCount = ', executionCount));
     const nextExecutionTime = new Date(Date.now() + delayMinutes * 60 * 1000);
     console.log(
@@ -45,10 +46,16 @@ async function dailyExecution() {
       console.log(
         chalk.yellowBright.bold('Reached Daily Limit ()()()()()()()()')
       );
-      setTimeout(
-        dailyExecution,
-        86_400_000 - executionsPerDay * delayMinutes * 60 * 1000
-      );
+      console.log(
+        chalk.yellowBright.bold('Current time:', Date.now().toLocaleString())
+      ); // log
+      console.log(
+        chalk.yellowBright.bold(
+          'Next upload at:',
+          (Date.now() + 61_200_000).toLocaleString()
+        )
+      ); // log
+      setTimeout(dailyExecution, 61_200_000);
     }
   } catch (error) {
     console.log(chalk.redBright.bold(error));
