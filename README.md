@@ -79,6 +79,20 @@ A: It works fine for me, try out and let me know if it works for you!
 
 ---
 
+Q: How many videos should I upload per day?
+
+A: Here is the playbook:
+
+1. First 24h **_NO VIDEOS_**
+2. Then for 3 days only 3 vids per day
+3. After warmup blast as many as you would like with at least 1h delay between videos.
+
+Also don't forget mics like following 20-30 accs, scrolling and liking for 1h from day to day.
+
+More info from Barsin: https://www.youtube.com/watch?v=mb4xfCgQWKs
+
+---
+
 Q: My computer keeps going to sleep and disconnecting ADB, how to prevent it?
 
 A: Use https://github.com/CHerSun/NoSleep if you don't want to dig in settings every time you want to change sleep behaviour. You can also set up OpenSSH Server on your box and monitor it remotely.
