@@ -121,7 +121,7 @@ export async function moveLatestVideo() {
     );
 
     // Verify the move
-    const listCommand = `ls -trh ${COMPLETED_UPLOADS}/`;
+    const listCommand = `ls -trh ${COMPLETED_UPLOADS}/ | head -n 10`;
     const { stdout: completedList } = await execPromise(
       `adb shell "${listCommand}"`
     );
