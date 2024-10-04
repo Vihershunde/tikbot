@@ -23,6 +23,7 @@ This script is written in JS and is appium-based.
 - Android Platform Tools
 - CMDline Android Studio tools
 - NodeJS
+- pnpm
 - Android phone (no IOS support yet), root is not needed
 
 ## Installation
@@ -34,7 +35,7 @@ This script is written in JS and is appium-based.
 - Install appium:
 
 ```powershell
-npm install -g appium
+pnpm install -g appium
 ```
 
 - start it:
@@ -58,7 +59,7 @@ git clone https://github.com/Vihershunde/tikbot.git
 - Install packages from package.json
 
 ```powershell
-npm i
+pnpm i
 ```
 
 - Put videos for upload into `/storage/emulated/0/PendingUploads`
@@ -66,7 +67,7 @@ npm i
 - Run script:
 
 ```powershell
-node test.js
+node .
 ```
 
 **Enjoy!**

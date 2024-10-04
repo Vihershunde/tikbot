@@ -1,21 +1,20 @@
 {
-  "name": "appium",
+  "name": "tikbot",
   "version": "1.0.0",
-  "main": "test.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "monitor": "node monitor.js"
-  },
-  "author": "",
-  "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "webdriverio": "^9.0.9"
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "viher",
+  "license": "GLWTPL",
   "dependencies": {
     "chalk": "^5.3.0",
     "figlet": "^1.7.0",
-    "lolcatjs": "^2.4.3"
+    "inquirer": "^11.1.0",
+    "lolcatjs": "^2.4.3",
+    "webdriverio": "^9.1.2"
   }
 }

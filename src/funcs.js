@@ -2,20 +2,9 @@ import chalk from 'chalk';
 import { remote } from 'webdriverio';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-
-export function sleep(milliseconds) {
-  const end = Date.now() + milliseconds;
-  while (Date.now() < end) {
-    // Busy-wait loop
-  }
-}
-
-export function countFrom(number) {
-  for (let i = 0; i < number; i++) {
-    console.log(chalk.blue.bold(`[${i}]`));
-    sleep(1000); // Assuming sleep is defined elsewhere
-  }
-}
+import { count } from './utils/sleep.js';
+import { userConfirmation, ctaString } from './main.js';
+import { sendString } from './utils/key-sender.js';
 
 const capabilities = {
   platformName: 'Android',
@@ -32,37 +21,43 @@ const wdOpts = {
 
 export async function runTest() {
   const driver = await remote(wdOpts);
+
+  // #region Playground
+
+  // await count(30);
+  // #endregion Playground
+
   try {
-    console.log(chalk.bold.blue('Pressing Home Button')); // log
+    console.log(chalk.bold.cyan('Pressing Home Button')); // log
     await driver.pressKeyCode(3);
     await driver.$('//android.widget.TextView[@text="TikTok"]').click();
-    countFrom(6);
+    await count(5);
     const createButton = await driver.$(
       '//android.widget.Button[@content-desc="Create"]'
     );
     if (await createButton.isExisting()) {
       await createButton.click();
     }
-    countFrom(6);
+    await count(5);
 
-    console.log(chalk.bold.blue('Clicking the Album Button')); // log
+    console.log(chalk.bold.cyan('Clicking the Album Button')); // log
     await driver.executeScript('mobile: clickGesture', [
       {
         x: 1165 + Math.floor(Math.random() * 11) - 5,
         y: 2137 + Math.floor(Math.random() * 11) - 5,
       },
     ]);
-    countFrom(6);
+    await count(5);
 
-    console.log(chalk.bold.blue('Clicking the All⮟ Button')); // log
+    console.log(chalk.bold.cyan('Clicking the All⮟ Button')); // log
     await driver.$('//android.widget.TextView[@text="All"]').click();
-    countFrom(6);
+    await count(5);
 
-    console.log(chalk.bold.blue('Clicking the PendingUploads Folder')); // log
+    console.log(chalk.bold.cyan('Clicking the PendingUploads Folder')); // log
     await driver.$('//android.widget.TextView[@text="PendingUploads"]').click();
-    countFrom(6);
+    await count(5);
 
-    console.log(chalk.bold.blue('Clicking the first video in grid')); // log
+    console.log(chalk.bold.cyan('Clicking the first video in grid')); // log
     await driver.executeScript('mobile: clickGesture', [
       {
         x: 245 + Math.floor(Math.random() * 11) - 5,
@@ -70,21 +65,47 @@ export async function runTest() {
       },
     ]);
 
-    countFrom(6);
+    await count(5);
 
-    console.log(chalk.bold.blue('Clicking the Next button')); // log FIRST NEXT
+    console.log(chalk.bold.cyan('Clicking the Next button')); // log FIRST NEXT
     await driver.$('//android.widget.Button[@text="Next"]').click();
-    countFrom(6);
+    await count(5);
 
-    console.log(chalk.bold.blue('Clicking the second Next')); // log SECOND NEXT
+    // INQUIRER AREA
+
+    if (userConfirmation) {
+      console.log(chalk.bold.cyan('Clicking the Aa')); // Clicking Aa
+      await driver.$('accessibility id:Text').click();
+
+      await count(3);
+      await sendString(driver, ctaString);
+
+      await count(3);
+      await driver.pressKeyCode(4); // KEYCODE_BACK
+
+      await count(3);
+      console.log(chalk.bold.cyan('Draging it lower')); // Draging it lower
+      await driver.executeScript('mobile: dragGesture', [
+        {
+          startX: 683 + Math.floor(Math.random() * 11) - 5,
+          startY: 1270 + Math.floor(Math.random() * 11) - 5,
+          endX: 683 + Math.floor(Math.random() * 11) - 5,
+          endY: 1934 + Math.floor(Math.random() * 11) - 5,
+          speed: 500 + Math.floor(Math.random() * 11) - 5,
+        },
+      ]);
+      await count(3);
+    }
+
+    console.log(chalk.bold.cyan('Clicking the second Next')); // log SECOND NEXT
     await driver.$('//android.widget.TextView[@text="Next"]').click();
-    countFrom(6);
+    await count(5);
 
-    console.log(chalk.bold.blue('Clicking the Post')); // log POST
+    console.log(chalk.bold.cyan('Clicking the Post')); // log POST
     await driver.$('//android.widget.TextView[@text="Post"]').click();
-    await new Promise((resolve) => setTimeout(resolve, 20_000));
+    await count(40);
     await driver.pressKeyCode(3);
-    countFrom(11);
+    await count(10);
   } finally {
     await driver.pause(1000);
     await driver.deleteSession();

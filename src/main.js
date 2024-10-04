@@ -1,27 +1,19 @@
 import { runTest, moveLatestVideo } from './funcs.js';
 import chalk from 'chalk';
-import figlet from 'figlet';
-import lolcatjs from 'lolcatjs';
+import { showBanner } from './utils/show-banner.js';
+import { count, sleep } from './utils/sleep.js';
+import { yesNoText } from './utils/prompt-utils.js';
 
-figlet.text(
-  'TikBot',
-  {
-    font: 'Roman',
-  },
-  function (err, data) {
-    if (err) {
-      console.log('Something went wrong with figlet...');
-      console.dir(err);
-      return;
-    }
-    lolcatjs.fromString(data);
-  }
-);
-
-const executionsPerDay = 4;
-let delayMinutes = 120;
-
+// Config
+const executionsPerDay = 6;
+const delayMinutes = 120;
 let executionCount = 0;
+export const ctaString =
+  'Click the link in the bio to earn a $500 DoorDash voucher!';
+
+await showBanner('TikBot');
+await sleep(200);
+export const userConfirmation = await yesNoText();
 
 async function dailyExecution() {
   try {
@@ -30,7 +22,7 @@ async function dailyExecution() {
 
     executionCount++;
     let randDelayMinutes = delayMinutes + Math.round(Math.random() * 60);
-    console.log(chalk.bold.greenBright('executionCount = ', executionCount));
+    console.log({ delayMinutes, randDelayMinutes, executionCount }); // console log
     const nextExecutionTime = new Date(
       Date.now() + randDelayMinutes * 60 * 1000
     );
