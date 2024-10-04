@@ -31,7 +31,7 @@ This script is written in JS and is appium-based.
 - Add Platform tools and cmdline tools to PATH variable or .bashrc
 - Enable USB debugging on Android phone
 - Add 2 folders, `PendingUploads` and `CompletedUploads` to the `/storage/emulated/0/`
-- Edit `driver.executeScript()` in `funcs.js/runTest()` if you need to tap correct x and y values
+- Edit px values in `driver.executeScript()` functions if you need to tap correct x and y values because every device has different dimensions
 - Install appium:
 
 ```powershell
