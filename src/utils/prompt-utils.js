@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import { ctaString } from '../main.js';
+import { ctaString } from '../config.js';
 
 export async function yesNoText() {
   console.log({ ctaString });

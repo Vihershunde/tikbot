@@ -3,8 +3,9 @@ import { remote } from 'webdriverio';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { count } from './utils/sleep.js';
-import { userConfirmation, ctaString } from './main.js';
+import { userConfirmation } from './main.js';
 import { sendString } from './utils/key-sender.js';
+import { ctaString } from './config.js';
 
 const capabilities = {
   platformName: 'Android',
@@ -71,13 +72,22 @@ export async function runTest() {
     await driver.$('//android.widget.Button[@text="Next"]').click();
     await count(5);
 
-    // INQUIRER AREA
+    // IF YOU WANNA ADD TEXT - AREA
 
     if (userConfirmation) {
       console.log(chalk.bold.cyan('Clicking the Aa')); // Clicking Aa
       await driver.$('accessibility id:Text').click();
 
       await count(3);
+      await driver.executeScript('mobile: clickGesture', [
+        {
+          x: 721 + Math.floor(Math.random() * 11) - 3,
+          y: 272 + Math.floor(Math.random() * 11) - 3,
+        },
+      ]); // Clicking Outline
+
+      await count(5);
+
       await sendString(driver, ctaString);
 
       await count(3);

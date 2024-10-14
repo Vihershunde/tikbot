@@ -5,11 +5,9 @@ import { count, sleep } from './utils/sleep.js';
 import { yesNoText } from './utils/prompt-utils.js';
 
 // Config
-const executionsPerDay = 6;
+const executionsPerDay = 3;
 const delayMinutes = 120;
 let executionCount = 0;
-export const ctaString =
-  'Click the link in the bio to earn a $500 DoorDash voucher!';
 
 await showBanner('TikBot');
 await sleep(200);

@@ -32,6 +32,7 @@ This script is written in JS and is appium-based.
 - Enable USB debugging on Android phone
 - Add 2 folders, `PendingUploads` and `CompletedUploads` to the `/storage/emulated/0/`
 - Edit px values in `driver.executeScript()` functions if you need to tap correct x and y values because every device has different dimensions
+- rename `config.example.js` to `config.js` and add string of your choice
 - Install appium:
 
 ```powershell
